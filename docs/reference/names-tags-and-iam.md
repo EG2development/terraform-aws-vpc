@@ -55,7 +55,7 @@ A regional NAT gateway also needs `ec2:DescribeAvailabilityZones` at apply time.
 
 | | Minimum | Why |
 | --- | --- | --- |
-| Terraform | 1.9.0 | Variable validations that refer to other variables |
+| Terraform | 1.16.0 | The floor shared by this family of modules |
 | `hashicorp/aws` | 6.24 | Regional NAT gateways (`availability_mode`) |
 
 Inputs and outputs are listed in the [README](../../README.md#inputs).

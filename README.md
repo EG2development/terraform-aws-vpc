@@ -56,20 +56,20 @@ it), never to a branch. Run `terraform init` after changing `source`.
 ## Requirements
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | terraform | >= 1.9.0 |
 | aws | >= 6.24 |
 
 ## Providers
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | aws | >= 6.24 |
 
 ## Resources
 
 | Name | Type |
-| ---- | ---- |
+|------|------|
 | [aws_cloudwatch_log_group.flow_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_default_security_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group) | resource |
 | [aws_eip.nat](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
@@ -91,7 +91,7 @@ it), never to a branch. Run `terraform init` after changing `source`.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-| ---- | ----------- | ---- | ------- | :------: |
+|------|-------------|------|---------|:--------:|
 | cidr\_block | IPv4 CIDR block of the VPC, for example "10.0.0.0/16". Changing it replaces the VPC and everything in it. | `string` | n/a | yes |
 | name | Prefix for every name and Name tag the module creates, for example "payments-prod". The VPC is tagged "{name}-vpc"; docs/reference/names-tags-and-iam.md lists every derived name. | `string` | n/a | yes |
 | availability\_zones | Availability Zones for the subnets, in order: subnet N of each tier is placed in zone N. Null (default) uses the Region's zones that need no opt-in, sorted by name; pin the list in production so the choice is explicit. | `list(string)` | `null` | no |
@@ -111,7 +111,7 @@ it), never to a branch. Run `terraform init` after changing `source`.
 ## Outputs
 
 | Name | Description |
-| ---- | ----------- |
+|------|-------------|
 | availability\_zones | Availability Zones the subnets use, in subnet order. |
 | default\_security\_group\_id | ID of the VPC's default security group (rules removed when manage\_default\_security\_group is true). |
 | flow\_log\_group\_name | Name of the CloudWatch log group that receives the flow logs, or null when flow logs are off. |
@@ -141,8 +141,9 @@ it), never to a branch. Run `terraform init` after changing `source`.
 
 ## Security scanning
 
-Checkov runs on every pull request. Two checks are skipped, in
-[`.github/workflows/ci.yml`](.github/workflows/ci.yml):
+Checkov runs on every pull request via
+[Static Analysis](.github/workflows/workflow.yml). Two AWS checks are skipped in
+[`configs/checkov.yml`](configs/checkov.yml):
 
 | Check | Why it is skipped |
 | --- | --- |
@@ -163,7 +164,8 @@ Semantic versions, tags `vMAJOR.MINOR.PATCH`, created by release-please from
 Conventional Commit pull-request titles. Patch: a fix that changes no plan. Minor: a
 new optional input, output or off-by-default resource. Major: anything that can
 change or replace an existing caller's resources, or raise a minimum version.
-Details: [the standard](https://github.com/EG2development/terraform-module-standards/blob/main/docs/standard.md).
+For the contribution and release checks, see [`CONTRIBUTING.md`](CONTRIBUTING.md)
+and [the release workflow](.github/workflows/release-please.yml).
 
 ## Contributing and ownership
 
